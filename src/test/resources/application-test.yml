@@ -1,0 +1,6 @@
+app:
+  scheduler:
+    enabled: false
+kafka:
+  group-id: weather-aggregator-test
+  topic: weather-topic-test

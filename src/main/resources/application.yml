@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: weather-analytics-service
+  kafka:
+    producer:
+      bootstrap-servers: localhost:29091
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        enable.idempotence: true
+
+    consumer:
+      group-id: ${kafka.group-id}
+      bootstrap-servers: localhost:29091
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+
+app:
+  scheduler:
+    enabled: true
+    interval: 5000
+
+kafka:
+  group-id: weather-aggregator
+  topic: weather-topic
